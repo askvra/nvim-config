@@ -22,54 +22,79 @@ vim.g.mapleader = " "
 -- =============== REMAPPING =============== --
 -- ========================================= --
 local modes = { "n", "i", "c", "t", "x" }
+
 -- Remap Alt-j to Ctrl-n in normal and visual mode
 vim.keymap.set({ "n", "x" }, "<M-j>", "<C-n>", { noremap = true })
+
 -- Remap Alt-k to Ctrl-p in normal and visual mode
 vim.keymap.set({ "n", "x" }, "<M-k>", "<C-p>", { noremap = true })
+
 -- Remap Alt-j to Ctrl-n in insert mode
 vim.keymap.set("i", "<M-j>", "<C-n>", { noremap = true })
+
 -- Remap Alt-k to Ctrl-p in insert mode
 vim.keymap.set("i", "<M-k>", "<C-p>", { noremap = true })
+
 -- Remap Alt-j to Ctrl-n in command mode
 vim.keymap.set("c", "<M-j>", "<C-n>", { noremap = true })
+
 -- Remap Alt-k to Ctrl-p in command mode
 vim.keymap.set("c", "<M-k>", "<C-p>", { noremap = true })
+
 -- Remap Alt-j to Ctrl-n in terminal mode
 vim.keymap.set("t", "<M-j>", "<C-n>", { noremap = true })
+
 -- Remap Alt-k to Ctrl-p in terminal mode
 vim.keymap.set("t", "<M-k>", "<C-p>", { noremap = true })
+
 -- Remap Alt-q to :qa (quit all)
 vim.keymap.set('n', '<M-q>', ':qa<CR>', { silent = true })
+
 -- Remap Space-e to open diagnostic float
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+
 -- Remap Space-q to open diagnostics in loclist
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
 -- Remap Ctrl-e to Telescope find_files
 vim.keymap.set('n', '<C-e>', ':Telescope find_files<CR>', { silent = true })
+
 -- Remap Ctrl-Shift-e to Telescope oldfiles (recent files)
 vim.keymap.set('n', '<C-S-e>', ':Telescope oldfiles<CR>', { silent = true })
+
 -- Remap [d to previous diagnostic
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev) 
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+
 -- Remap ]d to next diagnostic
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+
 -- Remap Alt-l to BufferLineCycleNext (next tab)
 vim.keymap.set('n', '<M-l>', ':BufferLineCycleNext<CR>', { silent = true })
+
 -- Remap Alt-h to BufferLineCyclePrev (previous tab)
 vim.keymap.set('n', '<M-h>', ':BufferLineCyclePrev<CR>', { silent = true })
+
 -- Remap gd to go to definition
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+
 -- Remap gD to go to declaration
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+
 -- Remap gr to go to references
 vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+
 -- Remap K to hover documentation
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+
 -- Remap Space-cd to cd to current file's directory
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', { silent = true })
+
 -- Remap Alt-w to close current buffer
 vim.keymap.set('n', '<M-w>', ':bd<CR>', { silent = true })
+
 -- Remap Ctrl-k to signature help (function params)
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
+
 -- Remap Alt-b to toggle focus between NvimTree and workspace
 vim.keymap.set('n', '<M-b>', function()
   local api = require('nvim-tree.api')
@@ -98,6 +123,16 @@ vim.keymap.set('n', '<C-`>', function()
   end
 end, { noremap = true, silent = true })
 
+-- Move line: Alt+Down = down, Alt+Down = up (Normal + Visual only)
+vim.keymap.set('n', '<A-Down>', ':m .+1<CR>==', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-Up>', ':m .-2<CR>==', { noremap = true, silent = true })
+vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- Multi cursor: Shfit+Alt+Down = add below, Shift+Alt+Up = add above
+vim.keymap.set({ "n", "x" }, "<S-A-Down>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
+vim.keymap.set({ "n", "x" }, "<S-A-Up>", "<Cmd>MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
+
 -- ======================================= --
 -- =============== VIM CMD =============== --
 -- ======================================= --
@@ -112,7 +147,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'vague-theme/vague.nvim'
     Plug 'echasnovski/mini.icons'
-		Plug 'echasnovski/mini.pairs'
+    Plug 'echasnovski/mini.pairs'
+    Plug 'brenton-leighton/multiple-cursors.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -124,6 +160,7 @@ call plug#end()
 ]])
 vim.cmd.colorscheme("vague")
 vim.opt.termguicolors = true
+
 
 -- ============================================== --
 -- =============== IMPORT PLUGINS =============== --
@@ -140,11 +177,12 @@ require("nvim-surround").setup({})
 require('mini.icons').setup({ style = 'glyph' })
 require('mini.icons').mock_nvim_web_devicons()
 require('mini.pairs').setup()
+require('multiple-cursors').setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
     'basedpyright',
-    'clangd',    
+    'clangd',
     'lua_ls',
     'marksman',
   }
@@ -197,7 +235,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Automatically opening NvimTree when launched
-vim.api.nvim_create_autocmd("VimEnter", { 
+vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     require("nvim-tree.api").tree.open()
   end
