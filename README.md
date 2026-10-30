@@ -14,8 +14,8 @@ Trying my best to migrate from Zed and VSCode with ease
 - <A - k>: Previous item
 - <A - Down>: Move the current line down
 - <A - Up>: Move the current line up
-- <A - S - Down>: Add a new cursor above
-- <A - S - Up>: Add a new cursor below
+- <A - S - Down>: Add a new cursor below
+- <A - S - Up>: Add a new cursor above
 
 ### File & Tabs
 - <C - e>: Open file finder
