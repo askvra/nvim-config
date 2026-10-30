@@ -112,6 +112,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'vague-theme/vague.nvim'
     Plug 'echasnovski/mini.icons'
+		Plug 'echasnovski/mini.pairs'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -138,6 +139,7 @@ require('nvim-tree').setup({
 require("nvim-surround").setup({})
 require('mini.icons').setup({ style = 'glyph' })
 require('mini.icons').mock_nvim_web_devicons()
+require('mini.pairs').setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
