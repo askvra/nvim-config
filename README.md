@@ -4,34 +4,39 @@
 Trying my best to migrate from Zed and VSCode with ease
 
 ### Key Notation
-- `M`: Alt key
-- `C`: Ctrl key
-- `leader`: Space key (Space + e = leader + e)
+- A: Alt key
+- C: Ctrl key
+- S: Shift key
+- leader: Space key (Space + e = leader + e)
 
 ### Navigation & Completion
-- `<Alt - j>`: Next item
-- `<Alt - k>`: Previous item
+- <A - j>: Next item
+- <A - k>: Previous item
+- <A - Down>: Move the current line down
+- <A - Up>: Move the current line up
+- <A - S - Down>: Add a new cursor above
+- <A - S - Up>: Add a new cursor below
 
 ### File & Tabs
-- `<Ctrl - e>`: Open file finder
-- `<Ctrl - Shift - e>`: Open recent files
-- `<Alt - b>`: Toggle focus between NvimTree and workspace
-- `<Alt - l>`: Next buffer/tab
-- `<Alt - h>`: Previous buffer/tab
-- `<Alt - w>`: Close current buffer/tab
-- `<Alt - q>`: Quit all
+- <C - e>: Open file finder
+- <C - Shift - e>: Open recent files
+- <A - b>: Toggle focus between NvimTree and workspace
+- <A - l>: Next buffer/tab
+- <A - h>: Previous buffer/tab
+- <A - w>: Close current buffer/tab
+- <A - q>: Quit all
 
 ### LSP - Go to & Docs
-- `gd`: Go to definition
-- `gD`: Go to declaration
-- `gr`: Go to references
-- `K`: Show hover docs
-- `<Ctrl - k>`: Show function params
+- gd: Go to definition
+- gD: Go to declaration
+- gr: Go to references
+- K: Show hover docs
+- <C - k>: Show function params
 
 ### Diagnostics
-- `<Space - e>`: Show error under cursor
-- `<Space - q>`: Open all errors
-- `[d`: Previous diagnostic
-- `]d`: Next diagnostic
-- ``<Ctrl - `>``: Toggle focus error window
-- ``<Ctrl - Shift - `>``: Hide error window
+- <Space - e>: Show error under cursor
+- <Space - q>: Open all errors
+- [d: Previous diagnostic
+- ]d: Next diagnostic
+- <C - `>: Toggle focus error window
+- <C - S - `>: Hide error window
