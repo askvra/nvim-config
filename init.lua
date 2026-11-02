@@ -49,6 +49,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'vyfor/cord.nvim'
+    Plug 'MunifTanjim/nui.nvim'
+    Plug 'VonHeikemen/searchbox.nvim'
 call plug#end()
 ]])
 vim.cmd.colorscheme("vague")
@@ -176,15 +178,20 @@ vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = t
 vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- Multi cursor: Shfit+Alt+Down = add below, Shift+Alt+Up = add above
-vim.keymap.set({ "n", "x" }, "<S-A-Down>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
-vim.keymap.set({ "n", "x" }, "<S-A-Up>", "<Cmd>MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
+vim.keymap.set({ "n", "x" }, "<S-A-Down>", ":MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
+vim.keymap.set({ "n", "x" }, "<S-A-Up>", ":MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
 
 -- Multi cursor: ga = select all instance (whole word)
-vim.keymap.set({ "n", "x" }, "ga", "<Cmd>MultipleCursorsAddMatches<CR>", { desc = "Add cursor at all instances" })
+vim.keymap.set({ "n", "x" }, "ga", ":MultipleCursorsAddMatches<CR>", { desc = "Add cursor at all instances" })
 
 -- Multi cursor: gA = select all strings
-vim.keymap.set({ "n", "x" }, "gA", "<Cmd>MultipleCursorsAddMatchesV<CR>",
+vim.keymap.set({ "n", "x" }, "gA", ":MultipleCursorsAddMatchesV<CR>",
 	{ desc = "Add cursor at all substring matches" })
+
+-- Searchbox plug hotkey
+vim.keymap.set('n', '<leader>s', ':SearchBoxIncSearch<CR>')
+vim.keymap.set('n', '<leader>h', ':SearchBoxReplace<CR>', { desc = "Search & Replace" })
+vim.keymap.set('v', '<leader>h', ':SearchBoxReplace visual_mode=true<CR>', { desc = "Replace selection" })
 
 -- ============================================== --
 -- =============== IMPORT PLUGINS =============== --
