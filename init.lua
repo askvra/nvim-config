@@ -190,8 +190,8 @@ vim.keymap.set({ "n", "x" }, "gA", ":MultipleCursorsAddMatchesV<CR>",
 
 -- Searchbox plug hotkey
 vim.keymap.set('n', '<leader>s', ':SearchBoxIncSearch<CR>')
-vim.keymap.set('n', '<leader>h', ':SearchBoxReplace<CR>', { desc = "Search & Replace" })
-vim.keymap.set('v', '<leader>h', ':SearchBoxReplace visual_mode=true<CR>', { desc = "Replace selection" })
+vim.keymap.set('n', '<leader>r', ':SearchBoxReplace<CR>', { desc = "Search & Replace" })
+vim.keymap.set('v', '<leader>r', ':SearchBoxReplace visual_mode=true<CR>', { desc = "Replace selection" })
 
 -- ============================================== --
 -- =============== IMPORT PLUGINS =============== --
