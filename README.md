@@ -4,28 +4,31 @@
 Trying my best to migrate from Zed and VSCode with ease
 
 ### Key Notation
-- M: Alt key
+- A: Alt key
 - C: Ctrl key
 - S: Shift key
 - leader: Space key (Space + e = leader + e)
 
 ### Navigation & Completion
-- <M - j>: Next item
-- <M - k>: Previous item
-- <M - Down>: Move the current line down
-- <M - Up>: Move the current line up
-- <M - S - Down>: Add a new cursor below
-- <M - S - Up>: Add a new cursor above
+- <A - j>: Next item
+- <A - k>: Previous item
+- <A - Down>: Move the current line down
+- <A - Up>: Move the current line up
+- <A - S - Down>: Add a new cursor below
+- <A - S - Up>: Add a new cursor above
 
-### File & Tabs
+### Files & Tabs
 - <C - e>: Open file finder
 - <C - Shift - e>: Open recent files
-- <M - b>: Toggle focus between NvimTree and workspace
-- <M - S - b>: Toggle NvimTree
-- <M - l>: Next buffer/tab
-- <M - h>: Previous buffer/tab
-- <M - w>: Close current buffer/tab
-- <M - q>: Quit all
+- <A - b>: Toggle focus between NvimTree and workspace
+- <A - l>: Next buffer/tab
+- <A - h>: Previous buffer/tab
+- <A - w>: Close current buffer/tab
+- <A - q>: Quit all
+
+### Search & Replace
+- <leader>s: Open searching box
+- <leader>r: Open replacing box
 
 ### LSP - Go to & Docs
 - gd: Go to definition
