@@ -1,9 +1,45 @@
+-- ======================================= --
+-- =============== VIM CMD =============== --
+-- ======================================= --
+vim.cmd("syntax on")
+vim.cmd([[
+call plug#begin('~/.vim/plugged')
+    Plug 'nvim-lualine/lualine.nvim'
+    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+    Plug 'kylechui/nvim-surround'
+    Plug 'nvim-tree/nvim-tree.lua'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'vague-theme/vague.nvim'
+    Plug 'brenton-leighton/multiple-cursors.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
+    Plug 'vyfor/cord.nvim'
+    Plug 'MunifTanjim/nui.nvim'
+    Plug 'VonHeikemen/searchbox.nvim'
+    Plug 'rachartier/tiny-cmdline.nvim'
+    Plug 'nvim-mini/mini.icons'
+    Plug 'nvim-mini/mini.pairs'
+    Plug 'nvim-mini/mini.cursorword'
+    Plug 'nvim-mini/mini.animate'
+    Plug 'nvim-mini/mini.cmdline'
+    Plug 'nvim-mini/mini.completion'
+    Plug 'nvim-mini/mini.starter'
+call plug#end()
+]])
+vim.cmd.colorscheme("vague")
+vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415") -- For vague theme
+
 -- ================================================== --
 -- =============== VIM CONFIGURATIONS =============== --
 -- ================================================== --
-vim.g.matchparen_timeout = 20
-vim.g.mapleader = " "
-vim.g.matchparen_insert_timeout = 20
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.tabstop = 2
@@ -28,50 +64,16 @@ vim.opt.showmode = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
 vim.opt.showtabline = 2
-
--- ======================================= --
--- =============== VIM CMD =============== --
--- ======================================= --
-vim.cmd("syntax on")
-vim.cmd([[
-call plug#begin('~/.vim/plugged')
-    Plug 'nvim-lualine/lualine.nvim'
-    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-    Plug 'kylechui/nvim-surround'
-    Plug 'nvim-tree/nvim-tree.lua'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'vague-theme/vague.nvim'
-    Plug 'brenton-leighton/multiple-cursors.nvim'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
-    Plug 'vyfor/cord.nvim'
-    Plug 'MunifTanjim/nui.nvim'
-    Plug 'VonHeikemen/searchbox.nvim'
-    Plug 'rachartier/tiny-cmdline.nvim'
-    Plug 'nvim-mini/mini.icons'
-    Plug 'nvim-mini/mini.pairs'
-    Plug 'nvim-mini/mini.cursorword'
-    Plug 'nvim-mini/mini.animate'
-    Plug 'nvim-mini/mini.notify'
-    Plug 'nvim-mini/mini.cmdline'
-    Plug 'nvim-mini/mini.completion'
-    Plug 'nvim-mini/mini.starter'
-call plug#end()
-]])
-vim.cmd.colorscheme("vague")
-vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415") -- For vague theme
+vim.opt.cmdheight = 0
+vim.g.matchparen_timeout = 20
+vim.g.mapleader = " "
+vim.g.matchparen_insert_timeout = 20
 
 -- ========================================= --
 -- =============== REMAPPING =============== --
 -- ========================================= --
 vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { noremap = true, silent = true })
+vim.keymap.set('n', "<M-S-r>", ':source $MYVIMRC<CR>', { silent = true })
 
 -- Remap Alt-j to Ctrl-n in normal and visual mode
 vim.keymap.set({ "n", "x" }, "<M-j>", "<C-n>", { noremap = true })
@@ -209,6 +211,14 @@ vim.keymap.set('v', '<leader>r', ':SearchBoxReplace visual_mode=true<CR>', { des
 -- =============== ENABLE PLUGINS =============== --
 -- ============================================== --
 local animate = require('mini.animate')
+require('vim._core.ui2').enable()
+require('nvim-treesitter').setup({
+	ensure_installed = { "c", "lua", "python", "json", "toml" },
+	auto_install = true,
+	highlight = {
+		enable = true,
+	},
+})
 require('lualine').setup({
 	options = {
 		icons_enabled = true,
@@ -285,7 +295,19 @@ require('mason-lspconfig').setup({
 		'basedpyright',
 		'clangd',
 		'lua_ls',
+		'taplo',
+		'jsonls',
 		'marksman',
+	}
+})
+require('mason-tool-installer').setup({
+	ensure_installed = {
+		'black',
+		'prettier',
+		'clang-format',
+		'stylua',
+		'taplo',
+		'ruff',
 	}
 })
 require('cord').setup({
@@ -324,10 +346,22 @@ require('mini.animate').setup({
 		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
 	},
 })
-require('mini.notify').setup()
 require('mini.cmdline').setup()
 require('mini.completion').setup()
 require('mini.starter').setup()
+require("tiny-cmdline").setup({
+	width = {
+		value = "30%",
+		min = 30,
+		max = 30,
+	},
+	border = "none",
+	title = {
+		enabled = true,
+		pos = "center",
+	},
+	on_reposition = require("tiny-cmdline").adapters.blink,
+})
 
 -- ================================================== --
 -- =============== AUTOCOMPLETE SETUP =============== --
