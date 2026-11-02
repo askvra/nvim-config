@@ -1,6 +1,9 @@
 -- ================================================== --
 -- =============== VIM CONFIGURATIONS =============== --
 -- ================================================== --
+vim.g.matchparen_timeout = 20
+vim.g.mapleader = " "
+vim.g.matchparen_insert_timeout = 20
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.tabstop = 2
@@ -16,13 +19,15 @@ vim.opt.timeoutlen = 300
 vim.opt.clipboard = "unnamedplus"
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "pum"
-vim.g.mapleader = " "
 vim.opt.fillchars = { eob = " " }
-vim.g.matchparen_timeout = 20
-vim.g.matchparen_insert_timeout = 20
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
+vim.opt.shortmess:append("c")
+vim.opt.showmode = false
+vim.opt.cmdheight = 0
+vim.opt.laststatus = 3
+vim.opt.showtabline = 2
 
 -- ======================================= --
 -- =============== VIM CMD =============== --
@@ -38,8 +43,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'vague-theme/vague.nvim'
-    Plug 'echasnovski/mini.icons'
-    Plug 'echasnovski/mini.pairs'
     Plug 'brenton-leighton/multiple-cursors.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'hrsh7th/nvim-cmp'
@@ -51,14 +54,23 @@ call plug#begin('~/.vim/plugged')
     Plug 'vyfor/cord.nvim'
     Plug 'MunifTanjim/nui.nvim'
     Plug 'VonHeikemen/searchbox.nvim'
+    Plug 'rachartier/tiny-cmdline.nvim'
+    Plug 'nvim-mini/mini.icons'
+    Plug 'nvim-mini/mini.pairs'
+    Plug 'nvim-mini/mini.cursorword'
+    Plug 'nvim-mini/mini.animate'
+    Plug 'nvim-mini/mini.notify'
+    Plug 'nvim-mini/mini.cmdline'
+    Plug 'nvim-mini/mini.completion'
+    Plug 'nvim-mini/mini.starter'
 call plug#end()
 ]])
 vim.cmd.colorscheme("vague")
+vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415") -- For vague theme
 
 -- ========================================= --
 -- =============== REMAPPING =============== --
 -- ========================================= --
-local modes = { "n", "i", "c", "t", "x" }
 vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { noremap = true, silent = true })
 
 -- Remap Alt-j to Ctrl-n in normal and visual mode
@@ -194,8 +206,9 @@ vim.keymap.set('n', '<leader>r', ':SearchBoxReplace<CR>', { desc = "Search & Rep
 vim.keymap.set('v', '<leader>r', ':SearchBoxReplace visual_mode=true<CR>', { desc = "Replace selection" })
 
 -- ============================================== --
--- =============== IMPORT PLUGINS =============== --
+-- =============== ENABLE PLUGINS =============== --
 -- ============================================== --
+local animate = require('mini.animate')
 require('lualine').setup({
 	options = {
 		icons_enabled = true,
@@ -258,6 +271,13 @@ require("nvim-surround").setup({})
 require('mini.icons').setup({ style = 'glyph' })
 require('mini.icons').mock_nvim_web_devicons()
 require('mini.pairs').setup()
+require("vague").setup({
+	transparent = true, -- bật trong suốt
+	style = {
+		boolean = "bold",
+		-- ...
+	},
+})
 require('multiple-cursors').setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -276,6 +296,38 @@ require('cord').setup({
 		editing = "Editing ${filename}",
 	},
 })
+require('mini.cursorword').setup()
+require('mini.animate').setup({
+	cursor = {
+		enable = true,
+		timing = animate.gen_timing.linear({ duration = 10, unit = 'total' }),
+	},
+	scroll = {
+		enable = true,
+		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
+		subscroll = animate.gen_subscroll.equal({
+			predicate = function(total_scroll)
+				return total_scroll > 5
+			end
+		}),
+	},
+	resize = {
+		enable = true,
+		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
+	},
+	open = {
+		enable = true,
+		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
+	},
+	close = {
+		enable = true,
+		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
+	},
+})
+require('mini.notify').setup()
+require('mini.cmdline').setup()
+require('mini.completion').setup()
+require('mini.starter').setup()
 
 -- ================================================== --
 -- =============== AUTOCOMPLETE SETUP =============== --
@@ -338,4 +390,5 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 	end
 })
 
-vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415")
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
