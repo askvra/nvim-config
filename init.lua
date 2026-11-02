@@ -16,16 +16,18 @@ vim.opt.timeoutlen = 300
 vim.opt.clipboard = "unnamedplus"
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "pum"
-vim.cmd("syntax on")
 vim.g.mapleader = " "
 vim.opt.fillchars = { eob = " " }
 vim.g.matchparen_timeout = 20
 vim.g.matchparen_insert_timeout = 20
 vim.opt.clipboard = "unnamedplus"
+vim.opt.termguicolors = true
+vim.opt.mouse = "a"
 
 -- ======================================= --
 -- =============== VIM CMD =============== --
 -- ======================================= --
+vim.cmd("syntax on")
 vim.cmd([[
 call plug#begin('~/.vim/plugged')
     Plug 'nvim-lualine/lualine.nvim'
@@ -50,7 +52,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 ]])
 vim.cmd.colorscheme("vague")
-vim.opt.termguicolors = true
 
 -- ========================================= --
 -- =============== REMAPPING =============== --
