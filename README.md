@@ -1,3 +1,11 @@
+# nvim config
+> Migrating from code editor.
+
+**REQUIREMENTS**:
+- [vim-plug](https://github.com/junegunn/vim-plug)
+
+---
+
 ### Key Notation
 - A: Alt key
 - C: Ctrl key
