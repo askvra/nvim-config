@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'vague-theme/vague.nvim'
-    Plug 'brenton-leighton/multiple-cursors.nvim'
+    Plug 'mg979/vim-visual-multi'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -65,6 +65,8 @@ vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
 vim.opt.showtabline = 2
 vim.opt.cmdheight = 0
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 vim.g.matchparen_timeout = 20
 vim.g.mapleader = " "
 vim.g.matchparen_insert_timeout = 20
@@ -73,34 +75,34 @@ vim.g.matchparen_insert_timeout = 20
 -- =============== REMAPPING =============== --
 -- ========================================= --
 vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { noremap = true, silent = true })
-vim.keymap.set('n', "<M-S-r>", ':source $MYVIMRC<CR>', { silent = true })
+vim.keymap.set('n', "<A-S-r>", ':source $MYVIMRC<CR>', { silent = true })
 
 -- Remap Alt-j to Ctrl-n in normal and visual mode
-vim.keymap.set({ "n", "x" }, "<M-j>", "<C-n>", { noremap = true })
+vim.keymap.set({ "n", "x" }, "<A-j>", "<C-n>", { noremap = true })
 
 -- Remap Alt-k to Ctrl-p in normal and visual mode
-vim.keymap.set({ "n", "x" }, "<M-k>", "<C-p>", { noremap = true })
+vim.keymap.set({ "n", "x" }, "<A-k>", "<C-p>", { noremap = true })
 
 -- Remap Alt-j to Ctrl-n in insert mode
-vim.keymap.set("i", "<M-j>", "<C-n>", { noremap = true })
+vim.keymap.set("i", "<A-j>", "<C-n>", { noremap = true })
 
 -- Remap Alt-k to Ctrl-p in insert mode
-vim.keymap.set("i", "<M-k>", "<C-p>", { noremap = true })
+vim.keymap.set("i", "<A-k>", "<C-p>", { noremap = true })
 
 -- Remap Alt-j to Ctrl-n in command mode
-vim.keymap.set("c", "<M-j>", "<C-n>", { noremap = true })
+vim.keymap.set("c", "<A-j>", "<C-n>", { noremap = true })
 
 -- Remap Alt-k to Ctrl-p in command mode
-vim.keymap.set("c", "<M-k>", "<C-p>", { noremap = true })
+vim.keymap.set("c", "<A-k>", "<C-p>", { noremap = true })
 
 -- Remap Alt-j to Ctrl-n in terminal mode
-vim.keymap.set("t", "<M-j>", "<C-n>", { noremap = true })
+vim.keymap.set("t", "<A-j>", "<C-n>", { noremap = true })
 
 -- Remap Alt-k to Ctrl-p in terminal mode
-vim.keymap.set("t", "<M-k>", "<C-p>", { noremap = true })
+vim.keymap.set("t", "<A-k>", "<C-p>", { noremap = true })
 
 -- Remap Alt-q to :qa (quit all)
-vim.keymap.set('n', '<M-q>', ':qa<CR>', { silent = true })
+vim.keymap.set('n', '<A-S-q>', ':qa<CR>', { silent = true })
 
 -- Remap Space-e to open diagnostic float
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
@@ -121,10 +123,11 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
 -- Remap Alt-l to BufferLineCycleNext (next tab)
-vim.keymap.set('n', '<M-l>', ':BufferLineCycleNext<CR>', { silent = true })
-
+vim.keymap.set('n', '<A-l>', ':BufferLineCycleNext<CR>', { silent = true })
+vim.keymap.set('n', '<C-Tab>', ':BufferLineCycleNext<CR>', { silent = true, desc = "Next buffer/tab" })
 -- Remap Alt-h to BufferLineCyclePrev (previous tab)
-vim.keymap.set('n', '<M-h>', ':BufferLineCyclePrev<CR>', { silent = true })
+vim.keymap.set('n', '<A-h>', ':BufferLineCyclePrev<CR>', { silent = true })
+vim.keymap.set('n', '<C-S-Tab>', ':BufferLineCyclePrev<CR>', { silent = true, desc = "Previous buffer/tab" })
 
 -- Remap gd to go to definition
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
@@ -142,13 +145,13 @@ vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', { silent = true })
 
 -- Remap Alt-w to close current buffer
-vim.keymap.set('n', '<M-w>', ':bd<CR>', { silent = true })
+vim.keymap.set('n', '<A-w>', ':bd<CR>', { silent = true })
 
 -- Remap Ctrl-k to signature help (function params)
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 
 -- Remap Alt-b to toggle focus between NvimTree and workspace
-vim.keymap.set('n', '<M-b>', function()
+vim.keymap.set('n', '<A-b>', function()
 	local ok, api = pcall(require, 'nvim-tree.api')
 	if not ok then return end
 	if api.tree.is_visible() and api.tree.is_tree_buf() then
@@ -159,7 +162,7 @@ vim.keymap.set('n', '<M-b>', function()
 end, { silent = true })
 
 -- Remap Alt-Shift-B to toggle NvimTree
-vim.keymap.set('n', '<M-S-B>', function()
+vim.keymap.set('n', '<A-S-B>', function()
 	local ok, api = pcall(require, 'nvim-tree.api')
 	if not ok then return end
 	api.tree.toggle()
@@ -192,8 +195,8 @@ vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = t
 vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- Multi cursor: Shfit+Alt+Down = add below, Shift+Alt+Up = add above
-vim.keymap.set({ "n", "x" }, "<S-A-Down>", ":MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
-vim.keymap.set({ "n", "x" }, "<S-A-Up>", ":MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
+vim.keymap.set({ "n", "x" }, "<S-A-Down>", "<Plug>(VM-Add-Cursor-Down)", { desc = "Add cursor below" })
+vim.keymap.set({ "n", "x" }, "<S-A-Up>", "<Plug>(VM-Add-Cursor-Up)", { desc = "Add cursor above" })
 
 -- Multi cursor: ga = select all instance (whole word)
 vim.keymap.set({ "n", "x" }, "ga", ":MultipleCursorsAddMatches<CR>", { desc = "Add cursor at all instances" })
@@ -207,6 +210,31 @@ vim.keymap.set('n', '<leader>s', ':SearchBoxIncSearch<CR>')
 vim.keymap.set('n', '<leader>r', ':SearchBoxReplace<CR>', { desc = "Search & Replace" })
 vim.keymap.set('v', '<leader>r', ':SearchBoxReplace visual_mode=true<CR>', { desc = "Replace selection" })
 
+-- Remap Alt+Shift+F to format/indent entire file (gg=G)
+vim.keymap.set('n', '<A-S-f>', 'mzgg=G`z', { noremap = true, silent = true, desc = "Format file and restore cursor" })
+
+-- Remap F5 to run current file
+vim.keymap.set('n', '<F5>', function()
+	vim.cmd('w')
+	local ft = vim.bo.filetype
+	local file = vim.fn.expand('%')
+	local file_noext = vim.fn.expand('%<')
+
+	if ft == 'python' then
+		vim.cmd('split | terminal python "' .. file .. '"')
+	elseif ft == 'c' then
+		vim.cmd('split | terminal gcc "' .. file .. '" -o "' .. file_noext .. '" && "' .. file_noext .. '"')
+	elseif ft == 'cpp' then
+		vim.cmd('split | terminal g++ "' .. file .. '" -o "' .. file_noext .. '" && "' .. file_noext .. '"')
+	elseif ft == 'javascript' then
+		vim.cmd('split | terminal node "' .. file .. '"')
+	elseif ft == 'lua' then
+		vim.cmd('split | terminal lua "' .. file .. '"')
+	else
+		print("Chưa hỗ trợ chạy file loại: " .. ft)
+	end
+end, { silent = true, desc = "Run current file" })
+
 -- ============================================== --
 -- =============== ENABLE PLUGINS =============== --
 -- ============================================== --
@@ -219,6 +247,7 @@ require('nvim-treesitter').setup({
 		enable = true,
 	},
 })
+
 require('lualine').setup({
 	options = {
 		icons_enabled = true,
@@ -228,12 +257,28 @@ require('lualine').setup({
 		disabled_filetypes = { statusline = { 'NvimTree', 'packer', 'lazy' } },
 	},
 	sections = {
-		lualine_a = { 'mode' },
+		lualine_a = { 'hostname' },
 		lualine_b = { 'branch', 'diff' },
-		lualine_c = { { 'filename', path = 1 } },
-		lualine_x = { 'diagnostics' },
-		lualine_y = { 'progress' },
-		lualine_z = { 'location' }
+		lualine_c = {
+			-- { 'filename', path = 1 },
+			'diagnostics'
+		},
+		lualine_x = {
+		},
+		lualine_y = {
+			{
+				function()
+					return "ฅ^•ﻌ•^ฅ"
+				end
+			}
+			,
+			-- 'mode',
+		},
+		lualine_z = {
+			{
+				function() return os.date("%H:%M") end,
+			}
+		}
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -288,7 +333,6 @@ require("vague").setup({
 		-- ...
 	},
 })
-require('multiple-cursors').setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
 	ensure_installed = {
