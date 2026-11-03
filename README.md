@@ -13,8 +13,8 @@
 - leader: Space key (Space + e = leader + e)
 
 ### Navigation & Completion
-- `<A-j>`: Next item, replace <C-n>
-- `<A-k>`: Previous item, replace <C-p>
+- `<A-j>`: Next item, replace `<C-n>`
+- `<A-k>`: Previous item, replace `<C-p>`
 - `<A-Down>`: Move the current line down
 - `<A-Up>`: Move the current line up
 - `<A-S-Down>`: Add a new cursor below
@@ -51,5 +51,5 @@
   
 ### Others
 - `<F5>`: Run current file
-- `<A-S-f>`: Format current file, replace <mzgg=G`z>
+- `<A-S-f>`: Format current file, replace `<mzgg=G`z>`
 - `<A-S-r>`: Reload init.lua file
