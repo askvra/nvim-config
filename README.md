@@ -5,7 +5,7 @@
 - [vim-plug](https://github.com/junegunn/vim-plug)
 
 **INSTRUCTION**
-- Put everything except `alacritty` into `%localappdata\nvim` folder
+- Put everything except `alacritty.toml` into `%localappdata\nvim` folder
 - Open nvim and run `:PlugInstall`
 
 ---
