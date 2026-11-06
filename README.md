@@ -50,6 +50,5 @@
 - ``<C-S-`>``: Hide error window
   
 ### Others
-- `<F5>`: Run current file
 - `<A-S-f>`: Format current file, replace ``<mzgg=G`z>``
 - `<A-S-r>`: Reload init.lua file
