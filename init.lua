@@ -4,34 +4,32 @@
 vim.cmd("syntax on")
 vim.cmd([[
 call plug#begin('~/.vim/plugged')
-    Plug 'nvim-lualine/lualine.nvim'
-    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-    Plug 'kylechui/nvim-surround'
-    Plug 'nvim-tree/nvim-tree.lua'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'vague-theme/vague.nvim'
-    Plug 'mg979/vim-visual-multi'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
-    Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
-    Plug 'vyfor/cord.nvim'
-    Plug 'MunifTanjim/nui.nvim'
-    Plug 'VonHeikemen/searchbox.nvim'
-    Plug 'rachartier/tiny-cmdline.nvim'
-    Plug 'nvim-mini/mini.icons'
-    Plug 'nvim-mini/mini.pairs'
-    Plug 'nvim-mini/mini.cursorword'
-    Plug 'nvim-mini/mini.animate'
-    Plug 'nvim-mini/mini.cmdline'
-    Plug 'nvim-mini/mini.completion'
-    Plug 'nvim-mini/mini.starter'
+	Plug 'nvim-lualine/lualine.nvim'
+	Plug 'nvim-tree/nvim-tree.lua'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'nvim-mini/mini.icons'
+	Plug 'nvim-mini/mini.pairs'
+	Plug 'nvim-mini/mini.cursorword'
+	Plug 'nvim-mini/mini.cmdline'
+	Plug 'nvim-mini/mini.completion'
+	Plug 'nvim-mini/mini.starter'
+	Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+	Plug 'kylechui/nvim-surround'
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'vague-theme/vague.nvim'
+	Plug 'mg979/vim-visual-multi'
+	Plug 'hrsh7th/nvim-cmp'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'L3MON4D3/LuaSnip'
+	Plug 'saadparwaiz1/cmp_luasnip'
+	Plug 'williamboman/mason.nvim'
+	Plug 'williamboman/mason-lspconfig.nvim'
+	Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
+	Plug 'vyfor/cord.nvim'
+	Plug 'MunifTanjim/nui.nvim'
+	Plug 'VonHeikemen/searchbox.nvim'
 call plug#end()
 ]])
 vim.cmd.colorscheme("vague")
@@ -58,13 +56,12 @@ vim.opt.wildoptions = "pum"
 vim.opt.fillchars = { eob = " " }
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
-vim.opt.mouse = "a"
+-- vim.opt.mouse = "a"
 vim.opt.shortmess:append("c")
 vim.opt.showmode = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
 vim.opt.showtabline = 2
-vim.opt.cmdheight = 0
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.g.matchparen_timeout = 20
@@ -231,14 +228,14 @@ vim.keymap.set('n', '<F5>', function()
 	elseif ft == 'lua' then
 		vim.cmd('split | terminal lua "' .. file .. '"')
 	else
-		print("Chưa hỗ trợ chạy file loại: " .. ft)
+		print("Can not run file with type: " .. ft)
 	end
 end, { silent = true, desc = "Run current file" })
 
 -- ============================================== --
 -- =============== ENABLE PLUGINS =============== --
 -- ============================================== --
-local animate = require('mini.animate')
+
 require('vim._core.ui2').enable()
 require('nvim-treesitter').setup({
 	ensure_installed = { "c", "lua", "python", "json", "toml" },
@@ -302,7 +299,7 @@ require('nvim-tree').setup({
 		adaptive_size = true,
 	},
 	renderer = {
-		group_empty = true,
+		group_empty = false,
 		root_folder_label = ":t",
 		highlight_git = true,
 		icons = {
@@ -310,29 +307,158 @@ require('nvim-tree').setup({
 				file = true,
 				folder = true,
 				folder_arrow = false,
-				git = true,
+				git = false,
 			}
 		}
-	},
-	filters = {
-		dotfiles = false,
 	},
 	git = {
 		enable = true,
 		ignore = false,
 	},
+	filters = {
+		dotfiles = false,
+		custom = {
+			"^\\.git$",
+			"^node_modules$",
+			"^\\.godot$",
+			"^\\.nomedia$",
+			"^\\.import$",
+			"^export\\.cfg$",
+			"^export_credentials\\.cfg$",
+			"\\.tmp$",
+			"\\.translation$",
+			"^\\.mono$",
+			"^data_.*$",
+			"^mono_crash\\..*\\.json$",
+			"^debug$",
+			"^target$",
+			"\\.rs\\.bk$",
+			"\\.pdb$",
+			"^mutants\\.out.*$",
+			"^__pycache__$",
+			"\\.py[codz]$",
+			"\\$py\\.class$",
+			"\\.so$",
+			"^\\.Python$",
+			"^build$",
+			"^develop-eggs$",
+			"^dist$",
+			"^downloads$",
+			"^eggs$",
+			"^\\.eggs$",
+			"^lib$",
+			"^lib64$",
+			"^parts$",
+			"^sdist$",
+			"^var$",
+			"^wheels$",
+			"\\.egg-info$",
+			"^\\.installed\\.cfg$",
+			"\\.egg$",
+			"^MANIFEST$",
+			"\\.manifest$",
+			"\\.spec$",
+			"^pip-log\\.txt$",
+			"^pip-delete-this-directory\\.txt$",
+			"^htmlcov$",
+			"^\\.tox$",
+			"^\\.nox$",
+			"^\\.coverage$",
+			"^\\.coverage\\..*$",
+			"^\\.cache$",
+			"^nosetests\\.xml$",
+			"^coverage\\.xml$",
+			"\\.cover$",
+			"\\.py\\.cover$",
+			"^\\.hypothesis$",
+			"^\\.pytest_cache$",
+			"^cover$",
+			"\\.mo$",
+			"\\.pot$",
+			"\\.log$",
+			"^local_settings\\.py$",
+			"^db\\.sqlite3$",
+			"^db\\.sqlite3-journal$",
+			"^instance$",
+			"^\\.webassets-cache$",
+			"^\\.scrapy$",
+			"^docs/_build$",
+			"^\\.pybuilder$",
+			"^\\.ipynb_checkpoints$",
+			"^profile_default$",
+			"^ipython_config\\.py$",
+			"^\\.abstra$",
+			"^\\.ruff_cache$",
+			"^\\.pypirc$",
+			"^marimo/_static$",
+			"^marimo/_lsp$",
+			"^__marimo__$",
+			"^\\.streamlit/secrets\\.toml$",
+			"^logs$",
+			"^npm-debug\\.log\\*$",
+			"^yarn-debug\\.log\\*$",
+			"^yarn-error\\.log\\*$",
+			"^lerna-debug\\.log\\*$",
+			"^report\\..*\\.json$",
+			"^pids$",
+			"\\.pid$",
+			"\\.seed$",
+			"\\.pid\\.lock$",
+			"^lib-cov$",
+			"^coverage$",
+			"\\.lcov$",
+			"^\\.nyc_output$",
+			"^\\.grunt$",
+			"^bower_components$",
+			"^\\.lock-wscript$",
+			"^web_modules$",
+			"\\.tsbuildinfo$",
+			"^\\.npm$",
+			"^\\.eslintcache$",
+			"^\\.stylelintcache$",
+			"^\\.node_repl_history$",
+			"\\.tgz$",
+			"^\\.yarn-integrity$",
+			"^\\.env$",
+			"^\\.env\\..*$",
+			"^\\.parcel-cache$",
+			"^\\.next$",
+			"^out$",
+			"^\\.nuxt$",
+			"^\\.output$",
+			"^\\.vuepress/dist$",
+			"^\\.temp$",
+			"^\\.svelte-kit$",
+			"^\\.vitepress/dist$",
+			"^\\.vitepress/cache$",
+			"^\\.docusaurus$",
+			"^\\.serverless$",
+			"^\\.fusebox$",
+			"^\\.dynamodb$",
+			"^\\.firebase$",
+			"^\\.tern-port$",
+			"^\\.vscode-test$",
+			"^\\.pnp\\..*$",
+			"^\\.yarn$",
+			"^vite\\.config\\.js\\.timestamp-.*$",
+			"^vite\\.config\\.ts\\.timestamp-.*$",
+			"^\\.vite$",
+			"^\\.vscode$",
+			"^\\.pio$",
+			"^\\.godot$",
+			"^\\.import$",
+			"\\.import$",
+			"\\.tmp$",
+			"\\.godot$",
+			"\\.uid$",
+			"\\.translation$",
+		}
+	}
 })
 require("nvim-surround").setup({})
 require('mini.icons').setup({ style = 'glyph' })
 require('mini.icons').mock_nvim_web_devicons()
 require('mini.pairs').setup()
-require("vague").setup({
-	transparent = true, -- bật trong suốt
-	style = {
-		boolean = "bold",
-		-- ...
-	},
-})
 require('mason').setup()
 require('mason-lspconfig').setup({
 	ensure_installed = {
@@ -363,48 +489,16 @@ require('cord').setup({
 	},
 })
 require('mini.cursorword').setup()
-require('mini.animate').setup({
-	cursor = {
-		enable = true,
-		timing = animate.gen_timing.linear({ duration = 10, unit = 'total' }),
-	},
-	scroll = {
-		enable = true,
-		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
-		subscroll = animate.gen_subscroll.equal({
-			predicate = function(total_scroll)
-				return total_scroll > 5
-			end
-		}),
-	},
-	resize = {
-		enable = true,
-		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
-	},
-	open = {
-		enable = true,
-		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
-	},
-	close = {
-		enable = true,
-		timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
-	},
-})
 require('mini.cmdline').setup()
 require('mini.completion').setup()
 require('mini.starter').setup()
-require("tiny-cmdline").setup({
-	width = {
-		value = "30%",
-		min = 30,
-		max = 30,
-	},
-	border = "none",
-	title = {
-		enabled = true,
-		pos = "center",
-	},
-	on_reposition = require("tiny-cmdline").adapters.blink,
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if vim.fn.argc() == 0 then
+			require("nvim-tree.api").tree.close()
+			pcall(require('mini.starter').open)
+		end
+	end,
 })
 
 -- ================================================== --
@@ -431,26 +525,28 @@ cmp.setup({
 -- Python LSP
 vim.lsp.config('basedpyright', {
 	cmd = { 'basedpyright-langserver', '--stdio' },
-	capabilities = require('cmp_nvim_lsp').default_capabilities()
 })
 vim.lsp.enable('basedpyright')
 
 -- C/Cpp LSP
 vim.lsp.config('clangd', {
-	capabilities = require('cmp_nvim_lsp').default_capabilities(),
-	cmd = { 'clangd' }
+	cmd = { 'clangd', '--background-index', '--clang-tidy' },
+	init_options = {
+		fallbackFlags = { '-std=c23' }
+	}
 })
 vim.lsp.enable('clangd')
+
+-- GDScript
+vim.lsp.config['gdscript'] = {
+	cmd = { "nc", "localhost", "6008" },
+	root_markers = { "project.godot" },
+}
+vim.lsp.enable('gdscript')
 
 -- ============================================= --
 -- =============== AUTO COMMANDS =============== --
 -- ============================================= --
-
--- Automatically reloading init.lua file
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = "init.lua",
-	command = "source %"
-})
 
 -- Automatically opening NvimTree when launched
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -470,3 +566,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_create_autocmd("VimResized", {
+	pattern = "*",
+	command = "wincmd =",
+})
