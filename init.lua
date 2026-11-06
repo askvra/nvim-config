@@ -167,9 +167,9 @@ require("nvim-tree").setup({
 	},
 	renderer = {
 		root_folder_label = false,
-    indent_markers = {
-      enable = false,
-    },
+		indent_markers = {
+			enable = false,
+		},
 		group_empty = true,
 		icons = {
 			show = {
@@ -178,12 +178,12 @@ require("nvim-tree").setup({
 				folder_arrow = false,
 				git = true,
 			},
-      glyphs = {
-        folder = {
-          arrow_closed = "",
-          arrow_open = "",
-        }
-      }
+			glyphs = {
+				folder = {
+					arrow_closed = "",
+					arrow_open = "",
+				}
+			}
 		},
 	},
 	filters = {
@@ -213,6 +213,20 @@ end, { desc = "Toggle focus between code and NvimTree" })
 require('bufferline').setup({
 	options = {
 		always_show_bufferline = true,
+	},
+	highlights = {
+		fill = { bg = 'NONE' },
+		background = { bg = 'NONE' },
+		buffer_selected = { bg = 'NONE' },
+		buffer_visible = { bg = 'NONE' },
+		tab = { bg = 'NONE' },
+		tab_selected = { bg = 'NONE' },
+		tab_separator = { bg = 'NONE' },
+		tab_separator_selected = { bg = 'NONE' },
+		separator = { bg = 'NONE' },
+		separator_selected = { bg = 'NONE' },
+		separator_visible = { bg = 'NONE' },
+		indicator_selected = { bg = 'NONE' },
 	},
 })
 require("nvim-surround").setup()
@@ -290,18 +304,18 @@ vim.lsp.enable('gdscript')
 -- ============================================= --
 vim.cmd.colorscheme("vague")
 
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
--- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
--- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
--- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
--- vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
--- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
--- vim.api.nvim_set_hl(0, "ColorColumn", { bg = "none" })
--- vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
--- vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
--- vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "ColorColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
+vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
+vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 
 vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415")
 
