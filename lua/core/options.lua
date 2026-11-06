@@ -1,5 +1,6 @@
 -- Basic settings
 vim.opt.number = true
+vim.opt.confirm = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.wrap = true
@@ -46,6 +47,3 @@ vim.opt.conceallevel = 0
 vim.opt.concealcursor = ""
 vim.opt.synmaxcol = 300
 vim.opt.fillchars = { eob = " " }
-
--- Others
-require('vim._core.ui2').enable()
