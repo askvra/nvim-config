@@ -26,6 +26,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 ]])
 
+require('vim._core.ui2').enable()
 require("core.options")
 require("core.keymaps")
 
