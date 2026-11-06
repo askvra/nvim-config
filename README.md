@@ -1,3 +1,5 @@
+![[preview.png]]
+
 # nvim config
 > Migrating from code editor.
 
