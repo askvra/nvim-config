@@ -33,20 +33,6 @@ call plug#end()
 -- =============== VIM CONFIGURATIONS =============== --
 -- ================================================== --
 
-vim.cmd.colorscheme("vague")
-vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "ColorColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
-vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
-vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 
 -- Basic settings
 vim.opt.number = true
@@ -57,7 +43,7 @@ vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.shortmess:append("I")
 vim.g.termfeatures = {
@@ -152,23 +138,23 @@ require('nvim-treesitter').setup({
 	highlight = { enable = true },
 })
 
-require('lualine').setup({
-	options = {
-		icons_enabled = true,
-		theme = 'auto',
-		component_separators = { left = '', right = '' },
-		section_separators = { left = '', right = '' },
-		disabled_filetypes = { statusline = { 'NvimTree', 'packer', 'lazy' } },
-	},
-	sections = {
-		lualine_a = { 'hostname' },
-		lualine_b = { 'branch', 'diff' },
-		lualine_c = { 'diagnostics' },
-		lualine_x = {},
-		lualine_y = { { function() return "ฅ^•ﻌ•^ฅ" end } },
-		lualine_z = { { function() return os.date("%H:%M") end } }
-	},
-})
+-- require('lualine').setup({
+-- 	options = {
+-- 		icons_enabled = true,
+-- 		theme = 'auto',
+-- 		component_separators = { left = '', right = '' },
+-- 		section_separators = { left = '', right = '' },
+-- 		disabled_filetypes = { statusline = { 'NvimTree', 'packer', 'lazy' } },
+-- 	},
+-- 	sections = {
+-- 		lualine_a = { 'hostname' },
+-- 		lualine_b = { 'branch', 'diff' },
+-- 		lualine_c = { 'diagnostics' },
+-- 		lualine_x = {},
+-- 		lualine_y = { { function() return "ฅ^•ﻌ•^ฅ" end } },
+-- 		lualine_z = { { function() return os.date("%H:%M") end } }
+-- 	},
+-- })
 
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
@@ -181,14 +167,23 @@ require("nvim-tree").setup({
 	},
 	renderer = {
 		root_folder_label = false,
+    indent_markers = {
+      enable = false,
+    },
 		group_empty = true,
 		icons = {
 			show = {
 				file = true,
 				folder = true,
-				folder_arrow = true,
+				folder_arrow = false,
 				git = true,
 			},
+      glyphs = {
+        folder = {
+          arrow_closed = "",
+          arrow_open = "",
+        }
+      }
 		},
 	},
 	filters = {
@@ -293,6 +288,23 @@ vim.lsp.enable('gdscript')
 -- ============================================= --
 -- =============== AUTO COMMANDS =============== --
 -- ============================================= --
+vim.cmd.colorscheme("vague")
+
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "ColorColumn", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
+-- vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
+
+vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415")
+
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 	callback = function()
 		if vim.bo.modifiable and vim.bo.buftype == "" and vim.fn.expand('%') ~= '' then
