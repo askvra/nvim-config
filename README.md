@@ -5,6 +5,7 @@
 
 **REQUIREMENTS**:
 - [vim-plug](https://github.com/junegunn/vim-plug)
+- [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads)
 
 **INSTRUCTION**
 - Put everything except `alacritty.toml` into `%localappdata\nvim` folder
