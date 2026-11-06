@@ -1,4 +1,4 @@
-![[preview.png]]
+![preview](./preview.md)
 
 # nvim config
 > Migrating from code editor.
