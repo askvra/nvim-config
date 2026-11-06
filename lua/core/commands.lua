@@ -16,7 +16,7 @@ vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 
-vim.cmd("highlight WinSeparator guifg=#141415 guibg=#141415")
+vim.cmd("highlight WinSeparator guifg=NONE guibg=NONE")
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 	callback = function()
