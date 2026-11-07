@@ -13,6 +13,12 @@ vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "BufferLineCloseButton", { bg = "none" })
+vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { bg = "none" })
+vim.api.nvim_set_hl(0, "BufferLineCloseButtonVisible", { bg = "none" })
+vim.api.nvim_set_hl(0, "BufferCurrentCloseButton", { bg = "none" })
+vim.api.nvim_set_hl(0, "BufferVisibleCloseButton", { bg = "none" })
+vim.api.nvim_set_hl(0, "BufferInactiveCloseButton", { bg = "none" })
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 	callback = function()
