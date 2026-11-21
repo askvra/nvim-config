@@ -4,7 +4,7 @@
 > Migrating from code editor.
 
 **REQUIREMENTS**:
-- [vim-plug](https://github.com/junegunn/vim-plug)
+- [LazyVim](https://www.lazyvim.org/)
 - [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads)
 
 **INSTRUCTION**
