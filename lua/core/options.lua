@@ -1,7 +1,7 @@
 -- Basic settings
 vim.opt.number = true
 vim.opt.confirm = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.cursorline = true
 vim.opt.wrap = true
 vim.opt.scrolloff = 10
@@ -30,7 +30,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 -- Visual settings
-vim.opt.splitbelow = true
+vim.opt.splitbelow = false
 vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
@@ -46,4 +46,4 @@ vim.opt.winblend = 0
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = ""
 vim.opt.synmaxcol = 300
-vim.opt.fillchars = { eob = " " }
+vim.opt.fillchars = { eob = " ", vert = " ", horiz = " " }

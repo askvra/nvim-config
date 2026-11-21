@@ -1,4 +1,5 @@
-vim.cmd.colorscheme("vague")
+-- vim.cmd.colorscheme("vague")
+vim.cmd.colorscheme("oldworld")
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
@@ -27,15 +28,18 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 		end
 	end
 })
+
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
 	command = "wincmd =",
 })
+
 vim.api.nvim_create_autocmd("BufEnter", {
-	nested = true,
-	callback = function()
-		if #vim.api.nvim_list_wins() == 1 and vim.bo["filetype"] == "nvimtree" then
-			vim.cmd("quit")
-		end
-	end,
+  nested = true,
+  callback = function()
+    local cur_tab_wins = vim.api.nvim_tabpage_list_wins(0)
+    if #cur_tab_wins == 1 and vim.bo["filetype"] == "NvimTree" then
+      vim.cmd("quit")
+    end
+  end,
 })
